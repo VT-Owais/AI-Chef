@@ -1,0 +1,436 @@
+/* Main container styling */
+.container-cuisine-section {
+  background-color: #1e8a3e;
+  padding: 2rem 1rem;
+  width: 100%;
+  color: white;
+  text-align: center;
+  position: relative;
+  top: 4.5rem;
+}
+
+/* Header styling */
+.center-head {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 3px;
+}
+
+.header-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.header-subtitle p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.trending-container-wrapper {
+  position: relative;
+  padding: 0 50px;
+}
+
+/* Recipe cards container */
+.trending-recipes-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  gap: 1rem;
+  padding: 1rem 0;
+  justify-content: flex-start;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Individual recipe card styling */
+.recipe-card {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  flex: 0 0 auto;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: black;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+}
+
+.recipe-image {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.recipe-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recipe-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.75rem 1rem 0.5rem;
+  margin: 0;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-description {
+  font-size: 0.9rem;
+  color: #666;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  min-height: 3rem;
+}
+
+.recipe-button {
+  background-color: #1e8a3e;
+  color: white;
+  border: none;
+  width: 90%;
+  margin: 0 auto 1rem;
+  padding: 0.75rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.recipe-button:hover {
+  background-color: #156e30;
+}
+
+/* Navigation arrows */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #1e8a3e;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.nav-arrow:hover {
+  background-color: white;
+}
+
+.nav-arrow-left {
+  left: 5px;
+}
+
+.nav-arrow-right {
+  right: 5px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .center-head {
+    font-size: 2.5rem;
+  }
+
+  .header-subtitle {
+    font-size: 1rem;
+  }
+
+  .trending-container-wrapper {
+    padding: 0 40px;
+  }
+
+  .recipe-card {
+    width: 260px;
+  }
+
+  .recipe-image {
+    height: 260px;
+  }
+}
+
+@media (max-width: 576px) {
+  .center-head {
+    font-size: 2rem;
+  }
+
+  .container-cuisine-section {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .recipe-card {
+    width: 220px;
+  }
+
+  .recipe-image {
+    height: 220px;
+  }
+
+  .nav-arrow {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+
+/* Italian Cuisine Section */
+.italian-cuisine-section {
+  text-align: center;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  background-color: #eff9f1;
+  position: relative;
+  top: 4.5rem;
+}
+
+.italian-cuisine-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.italian-cuisine-section p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 30px;
+  padding: 0 20px;
+}
+
+/* Individual Cuisine Box */
+.cuisine-box {
+  flex: 0 0 calc(33.33% - 30px);
+  box-shadow: 1px 4px 10px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f5fff8;
+  text-align: center;
+  padding: 1rem;
+}
+
+.cuisine-box img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cuisine-box h3 {
+  font-size: 1.75rem;
+  margin: 1rem 0;
+  color: #28a745;
+}
+
+.cuisine-box p {
+  font-size: 1.1rem;
+  color: #555;
+  padding: 0 1rem;
+}
+
+.cuisine-box button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cuisine-box button:hover {
+  background-color: #23c02b;
+  transform: scale(1.05);
+}
+
+/* Carousel Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.carousel-arrow.left {
+  left: 10px;
+}
+
+.carousel-arrow.right {
+  right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cuisine-box {
+    flex: 0 0 calc(50% - 30px);
+  }
+
+  .cuisine-box img {
+    height: 200px;
+  }
+
+  .carousel-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cuisine-box {
+    flex: 0 0 calc(100% - 30px);
+  }
+
+  .cuisine-box img {
+    height: 180px;
+  }
+
+  .carousel-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+}
+
+/* Famous meal.css */
+
+.famous-meals-section {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fafffa;
+}
+
+.famous-meals-section h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  font-weight: 900;
+  padding: 12px;
+}
+
+.famous-meals-section p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.famous-meals-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.famous-meal-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 216px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 16px 18px;
+}
+
+.famous-meal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.meal-image img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.meal-title {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.meal-description {
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.meal-button {
+  background-color: #28a745;
+  border: none;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.meal-button:hover {
+  background-color: #218838;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .famous-meals-container {
+    gap: 15px;
+  }
+
+  .famous-meal-card {
+    width: 45%;
+    padding: 13px 7px;
+  }
+}
+
+@media (max-width: 480px) {
+  .famous-meal-card {
+    width: 100%;
+  }
+}
