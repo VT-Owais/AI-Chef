@@ -20,7 +20,6 @@ const App = () => {
     <Router>
       <div className="app">
         <Navbar />
-         {/* Navbar is rendered here */}
         <Routes>
           <Route path="/" element={<Home handleSearch={handleSearch} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />} />
           <Route path="/cuisine" element={<Cuisine />} />
