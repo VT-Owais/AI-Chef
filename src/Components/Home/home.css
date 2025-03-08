@@ -422,9 +422,33 @@
   }
 }
 
+
+/* search result css */
+
 .search-results {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
+  gap: 16px; /* Space between cards */
+  padding: 16px;
+  justify-content: center; /* Center the items */
+}
+
+.recipe-card {
+  flex: 1 1 calc(33.333% - 32px); /* Three cards per row */
+  max-width: calc(33.333% - 32px); /* Ensure equal width */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 1024px) {
+  .recipe-card {
+    flex: 1 1 calc(50% - 16px); /* Two cards per row for tablets */
+    max-width: calc(50% - 16px);
+  }
+}
+
+@media (max-width: 768px) {
+  .recipe-card {
+    flex: 1 1 100%; /* One card per row for mobile */
+    max-width: 100%;
+  }
 }

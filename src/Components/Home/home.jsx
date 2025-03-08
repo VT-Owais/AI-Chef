@@ -1,13 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import './home.css';
-import RecipeCard from './recipecard';
+import RecipeCard from './RecipeCard';
 
-const Home = ({ handleSearch, searchQuery, setSearchQuery }) => {
+const Home = ({ handleSearch, searchQuery, setSearchQuery, recipes }) => {
   const heroRef = useRef(null);
   const whatIsRef = useRef(null);
   const howItWorksRef = useRef(null);
-  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -55,7 +54,7 @@ const Home = ({ handleSearch, searchQuery, setSearchQuery }) => {
         </div>
         <div className="search-results">
           {recipes.map((recipe, index) => (
-            <RecipeCard key={index} recipe={recipe} />
+            <RecipeCard key={index} recipe={recipe} /> // Render RecipeCard for each recipe
           ))}
         </div>
       </div>

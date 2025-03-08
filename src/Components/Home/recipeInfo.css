@@ -1,0 +1,90 @@
+.recipe-info-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .recipe-info-modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .recipe-info-content {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .recipe-info-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .recipe-info-right {
+    flex: 1;
+  }
+  
+  .recipe-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .green-heading {
+    color: green;
+    font-size: 1.5rem;
+    margin-top: 20px;
+  }
+  
+  .ingredients-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+  
+  .instructions {
+    margin-top: 10px;
+    line-height: 1.8; /* Improved line height for readability */
+    font-size: 1.1rem; /* Slightly larger font size */
+    color: #333; /* Darker text color for better contrast */
+  }
+  
+  .recipe-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .recipe-info-content {
+      flex-direction: column;
+    }
+  
+    .recipe-info-left {
+      order: -1; /* Move image to the top on small screens */
+    }
+  }
