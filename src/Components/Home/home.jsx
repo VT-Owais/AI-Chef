@@ -1,12 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import './home.css';
 import RecipeCard from './RecipeCard';
+import RecipeInfo from './RecipeInfo'; 
 
 const Home = ({ handleSearch, searchQuery, setSearchQuery, recipes }) => {
   const heroRef = useRef(null);
   const whatIsRef = useRef(null);
   const howItWorksRef = useRef(null);
+  const [selectedRecipe, setSelectedRecipe] = useState(null); // Track selected recipe
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -33,6 +35,17 @@ const Home = ({ handleSearch, searchQuery, setSearchQuery, recipes }) => {
     };
   }, []);
 
+  // Handle "View Recipe" button click
+  const handleViewRecipe = (recipe) => {
+    console.log('View Recipe Clicked:', recipe); // Log the clicked recipe
+    setSelectedRecipe(recipe);
+  };
+
+  // Close the RecipeInfo modal
+  const handleCloseRecipeInfo = () => {
+    setSelectedRecipe(null);
+  };
+
   return (
     <>
       <div ref={heroRef} className="home-page">
@@ -54,7 +67,11 @@ const Home = ({ handleSearch, searchQuery, setSearchQuery, recipes }) => {
         </div>
         <div className="search-results">
           {recipes.map((recipe, index) => (
-            <RecipeCard key={index} recipe={recipe} /> // Render RecipeCard for each recipe
+            <RecipeCard
+              key={index}
+              recipe={recipe}
+              onViewRecipe={() => handleViewRecipe(recipe)} // Pass onViewRecipe prop
+            />
           ))}
         </div>
       </div>
@@ -90,6 +107,11 @@ const Home = ({ handleSearch, searchQuery, setSearchQuery, recipes }) => {
           </div>
         </div>
       </div>
+
+      {/* Render RecipeInfo modal if a recipe is selected */}
+      {selectedRecipe && (
+        <RecipeInfo recipe={selectedRecipe} onClose={handleCloseRecipeInfo} />
+      )}
     </>
   );
 };

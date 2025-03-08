@@ -1,9 +1,64 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './cuisine.css';
+import RecipeCard from '../Home/RecipeCard'; // Correct import path
+import RecipeInfo from '../Home/RecipeInfo'; // Correct import path
 
 const TrendingCuisine = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [trendingRecipes, setTrendingRecipes] = useState([]);
+  const [selectedRecipe, setSelectedRecipe] = useState(null); // Track selected recipe
   const containerRef = useRef(null);
+
+  // Use hardcoded recipes
+  useEffect(() => {
+    const hardcodedRecipes = [
+      {
+        title: "Chris' Popular Chocolate Mousse",
+        ingredients: "350 mg Package Semi-Sweet Choco|Chips|1 pk Chocola…ream|1/4 c Margerine/butter|SpringForm Pan|Fridge",
+        servings: "1 Servings",
+        instructions: "THE CRUST Crush the wafers, preserving a few for g…ut 6 hours, though it might be ready before that.",
+        image: "https://via.placeholder.com/300x150",
+      },
+      {
+        title: "Pancakes",
+        ingredients: "flour, milk, eggs...",
+        instructions: "Mix ingredients and cook on a hot pan...",
+        image: "https://via.placeholder.com/300x150",
+      },
+      {
+        title: "Rock Cakes",
+        ingredients: "flour, sugar, butter...",
+        instructions: "Mix ingredients and bake...",
+        image: "https://via.placeholder.com/300x150",
+      },
+      {
+        title: "Spaghetti Carbonara",
+        ingredients: "spaghetti, eggs, bacon, cheese...",
+        instructions: "Cook spaghetti, mix with eggs and bacon...",
+        image: "https://via.placeholder.com/300x150",
+      },
+      {
+        title: "Chicken Curry",
+        ingredients: "chicken, curry powder, coconut milk...",
+        instructions: "Cook chicken with curry powder and coconut milk...",
+        image: "https://via.placeholder.com/300x150",
+      },
+      {
+        title: "Chocolate Cake",
+        ingredients: "flour, sugar, cocoa powder, eggs...",
+        instructions: "Mix ingredients and bake...",
+        image: "https://via.placeholder.com/300x150",
+      },
+      {
+        title: "Vegetable Stir Fry",
+        ingredients: "vegetables, soy sauce, garlic...",
+        instructions: "Stir fry vegetables with soy sauce and garlic...",
+        image: "https://via.placeholder.com/300x150",
+      },
+    ];
+
+    setTrendingRecipes(hardcodedRecipes); // Use hardcoded recipes
+  }, []);
 
   // Auto-scroll every 4 seconds
   useEffect(() => {
@@ -49,111 +104,44 @@ const TrendingCuisine = () => {
     }
   };
 
+  // Handle "View Recipe" button click
+  const handleViewRecipe = (recipe) => {
+    console.log('View Recipe Clicked:', recipe); // Log the clicked recipe
+    setSelectedRecipe(recipe);
+  };
+
+  // Close the RecipeInfo modal
+  const handleCloseRecipeInfo = () => {
+    setSelectedRecipe(null);
+  };
+
   return (
     <div className="container-cuisine-section">
       <h2 className="center-head">TRENDING RECIPES</h2>
       <div className="header-subtitle">
-        <p>Take home the Kitchen Comforts experience Try our Meal Kits and unleash your inner chef!</p>
+        <p>Take home the Kitchen Comforts experience. Try our Meal Kits and unleash your inner chef!</p>
       </div>
 
       <div className="trending-container-wrapper">
         <button className="nav-arrow nav-arrow-left" onClick={scrollLeft}>&#10094;</button>
 
         <div className="trending-recipes-container" ref={containerRef}>
-          {/* Recipe Cards */}
-          <div className="recipe-card">
-            <div className="recipe-image">
-              <img src="./src/assets/Images/food-img.png" alt="Recipe" />
-            </div>
-            <h3 className="recipe-title">Hearty, wholesome meals for the whole family</h3>
-            <p className="recipe-description">Delicious comfort food that everyone will love</p>
-            <button className="recipe-button">TRY OUR FAMILY FEAST KITS</button>
-          </div>
-
-          <div className="recipe-card">
-            <div className="recipe-image">
-              <img src="./src/assets/Images/food-img.png" alt="Recipe" />
-            </div>
-            <h3 className="recipe-title">Vegan favorites with a delicious twist</h3>
-            <p className="recipe-description">Plant-based recipes full of flavor</p>
-            <button className="recipe-button">VIEW OUR VEGAN OPTIONS</button>
-          </div>
-
-          <div className="recipe-card">
-            <div className="recipe-image">
-              <img src="./src/assets/Images/food-img.png" alt="Recipe" />
-            </div>
-            <h3 className="recipe-title">Asian delights to take you on a culinary trip</h3>
-            <p className="recipe-description">Authentic flavors from across Asia</p>
-            <button className="recipe-button">EAT YOUR WAY TO ASIA</button>
-          </div>
-
-          <div className="recipe-card">
-            <div className="recipe-image">
-              <img src="./src/assets/Images/food-img.png" alt="Recipe" />
-            </div>
-            <h3 className="recipe-title">Asian delights to take you on a culinary trip</h3>
-            <p className="recipe-description">Authentic flavors from across Asia</p>
-            <button className="recipe-button">EAT YOUR WAY TO ASIA</button>
-          </div>
-
-          <div className="recipe-card">
-            <div className="recipe-image">
-              <img src="./src/assets/Images/food-img.png" alt="Recipe" />
-            </div>
-            <h3 className="recipe-title">Asian delights to take you on a culinary trip</h3>
-            <p className="recipe-description">Authentic flavors from across Asia</p>
-            <button className="recipe-button">EAT YOUR WAY TO ASIA</button>
-          </div>
-
-          <div className="recipe-card">
-            <div className="recipe-image">
-              <img src="./src/assets/Images/food-img.png" alt="Recipe" />
-            </div>
-            <h3 className="recipe-title">Asian delights to take you on a culinary trip</h3>
-            <p className="recipe-description">Authentic flavors from across Asia</p>
-            <button className="recipe-button">EAT YOUR WAY TO ASIA</button>
-          </div>
-
-          <div className="recipe-card">
-            <div className="recipe-image">
-              <img src="./src/assets/Images/food-img.png" alt="Recipe" />
-            </div>
-            <h3 className="recipe-title">Asian delights to take you on a culinary trip</h3>
-            <p className="recipe-description">Authentic flavors from across Asia</p>
-            <button className="recipe-button">EAT YOUR WAY TO ASIA</button>
-          </div>
-
-          <div className="recipe-card">
-            <div className="recipe-image">
-              <img src="./src/assets/Images/food-img.png" alt="Recipe" />
-            </div>
-            <h3 className="recipe-title">Asian delights to take you on a culinary trip</h3>
-            <p className="recipe-description">Authentic flavors from across Asia</p>
-            <button className="recipe-button">EAT YOUR WAY TO ASIA</button>
-          </div>
-
-          <div className="recipe-card">
-            <div className="recipe-image">
-              <img src="./src/assets/Images/food-img.png" alt="Recipe" />
-            </div>
-            <h3 className="recipe-title">Asian delights to take you on a culinary trip</h3>
-            <p className="recipe-description">Authentic flavors from across Asia</p>
-            <button className="recipe-button">EAT YOUR WAY TO ASIA</button>
-          </div>
-
-          <div className="recipe-card">
-            <div className="recipe-image">
-              <img src="./src/assets/Images/food-img.png" alt="Recipe" />
-            </div>
-            <h3 className="recipe-title">Asian delights to take you on a culinary trip</h3>
-            <p className="recipe-description">Authentic flavors from across Asia</p>
-            <button className="recipe-button">EAT YOUR WAY TO ASIA</button>
-          </div>
+          {trendingRecipes.map((recipe, index) => (
+            <RecipeCard
+              key={index}
+              recipe={recipe}
+              onViewRecipe={() => handleViewRecipe(recipe)} // Pass onViewRecipe prop
+            />
+          ))}
         </div>
 
         <button className="nav-arrow nav-arrow-right" onClick={scrollRight}>&#10095;</button>
       </div>
+
+      {/* Render RecipeInfo modal if a recipe is selected */}
+      {selectedRecipe && (
+        <RecipeInfo recipe={selectedRecipe} onClose={handleCloseRecipeInfo} />
+      )}
     </div>
   );
 };

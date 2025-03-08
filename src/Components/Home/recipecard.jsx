@@ -1,27 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './RecipeCard.css';
-import RecipeInfo from './RecipeInfo';
 
-const RecipeCard = ({ recipe }) => {
-  const [showRecipeInfo, setShowRecipeInfo] = useState(false);
-
+const RecipeCard = ({ recipe, onViewRecipe }) => {
+  console.log('RecipeCard Props:', recipe, onViewRecipe); // Log props
   return (
-    <>
-      <div className="recipe-card">
-        <img
-          src={recipe.image || 'https://via.placeholder.com/300x150'}
-          alt={recipe.title}
-          className="recipe-image"
-        />
-        <h3 className="recipe-title">{recipe.title}</h3>
-        <button className="recipe-button" onClick={() => setShowRecipeInfo(true)}>
-          View Recipe
-        </button>
-      </div>
-      {showRecipeInfo && (
-        <RecipeInfo recipe={recipe} onClose={() => setShowRecipeInfo(false)} />
-      )}
-    </>
+    <div className="recipe-card">
+      <img
+        src={recipe.image || 'https://via.placeholder.com/300x150'} // Use placeholder if no image
+        alt={recipe.title}
+        className="recipe-image"
+      />
+      <h3 className="recipe-title">{recipe.title}</h3>
+      <button className="recipe-button" onClick={onViewRecipe}>
+        View Recipe
+      </button>
+    </div>
   );
 };
 
