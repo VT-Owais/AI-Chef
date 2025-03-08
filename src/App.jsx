@@ -20,20 +20,19 @@ const App = () => {
     try {
       const response = await fetch(`https://api.api-ninjas.com/v1/recipe?query=${encodeURIComponent(searchQuery)}`, {
         headers: {
-          'X-Api-Key': 'YOUR_NEW_API_KEY_HERE', // Use your new API key here
+          'X-Api-Key': 'yfwr5VqoyZmcOCJRNC0l3Q==BI5paE4i7T3Nload', 
         },
       });
       if (!response.ok) {
-        const errorData = await response.json(); // Parse error response
+        const errorData = await response.json();
         console.error('API Error:', errorData);
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      console.log(data); // Log the fetched data
-      // Pass the data to the Home component or handle it as needed
+      console.log(data); 
     } catch (error) {
       console.error('Error fetching recipes:', error);
-      alert(error.message); // Notify the user of the error
+      alert(error.message); 
     }
   };
 
