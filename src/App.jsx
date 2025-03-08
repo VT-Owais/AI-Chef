@@ -9,11 +9,32 @@ import Contact from './components/Contact/Contact';
 import Login from './components/Login/Login';
 
 const App = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    console.log('Searching for:', searchQuery);
+    if (!searchQuery.trim()) {
+      alert('Please enter a search term.');
+      return;
+    }
+    try {
+      const response = await fetch(`https://api.api-ninjas.com/v1/recipe?query=${encodeURIComponent(searchQuery)}`, {
+        headers: {
+          'X-Api-Key': 'YOUR_NEW_API_KEY_HERE', // Use your new API key here
+        },
+      });
+      if (!response.ok) {
+        const errorData = await response.json(); // Parse error response
+        console.error('API Error:', errorData);
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log(data); // Log the fetched data
+      // Pass the data to the Home component or handle it as needed
+    } catch (error) {
+      console.error('Error fetching recipes:', error);
+      alert(error.message); // Notify the user of the error
+    }
   };
 
   return (
