@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './cuisine.css';
-import RecipeInfo from '../Home/RecipeInfo'; //
+import RecipeInfo from '../Home/RecipeInfo'; 
+
 const FamousMeals = () => {
   const [famousRecipes, setFamousRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null); 
+
   // Fetch images from Pexels API
   const fetchImages = async (query) => {
     try {
       const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=15`, {
         headers: {
-          Authorization: 'FPuVufrCgR2u9v0vWKtIKH6hmsVgIyEKeDeaI3XnQ7vDSMnwxexIuww5', 
+          Authorization: 'FPuVufrCgR2u9v0vWKtIKH6hmsVgIyEKeDeaI3XnQ7vDSMnwxexIuww5', //Pexels API key
         },
       });
 
@@ -28,11 +30,12 @@ const FamousMeals = () => {
     }
   };
 
+  // Fetch famous recipes from API Ninjas
   const fetchFamousRecipes = async () => {
     try {
       const response = await fetch('https://api.api-ninjas.com/v1/recipe?query=Omelette & Fried Chicken & Ice Cream', {
         headers: {
-          'X-Api-Key': 'yfwr5VqoyZmcOCJRNC0l3Q==BI5paE4i7T3Nload',y
+          'X-Api-Key': 'yfwr5VqoyZmcOCJRNC0l3Q==BI5paE4i7T3Nload', 
         },
       });
 
@@ -49,13 +52,17 @@ const FamousMeals = () => {
     }
   };
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Fetch famous recipes
         const recipes = await fetchFamousRecipes();
 
+        // Fetch images for famous recipes
         const images = await fetchImages('Omelette & Fried Chicken & Ice Cream');
 
+        // Combine recipes with images
         const recipesWithImages = recipes.slice(0, 5).map((recipe, index) => ({
           ...recipe,
           image: images[index % images.length]?.src.medium || 'https://via.placeholder.com/300x150', // Use a placeholder if no image is available
@@ -70,13 +77,11 @@ const FamousMeals = () => {
     fetchData();
   }, []);
 
-  // Handle "View Recipe" button click
   const handleViewRecipe = (recipe) => {
-    console.log('View Recipe Clicked:', recipe); 
+    console.log('View Recipe Clicked:', recipe);
     setSelectedRecipe(recipe);
   };
 
-  // Close the RecipeInfo modal
   const handleCloseRecipeInfo = () => {
     setSelectedRecipe(null);
   };
@@ -100,6 +105,7 @@ const FamousMeals = () => {
         ))}
       </div>
 
+      {/* Render RecipeInfo modal if a recipe is selected */}
       {selectedRecipe && (
         <RecipeInfo recipe={selectedRecipe} onClose={handleCloseRecipeInfo} />
       )}
