@@ -19,3 +19,5 @@ const RecipeCard = ({ recipe, onViewRecipe }) => {
 };
 
 export default RecipeCard;
+
+

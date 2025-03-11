@@ -10,31 +10,88 @@ import Login from './components/Login/Login';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [recipes, setRecipes] = useState([]); // State to store fetched recipes
+  const [recipes, setRecipes] = useState([]); // State to store fetched recipes with images
 
+  // Fetch recipes from API Ninjas
+  const fetchRecipes = async (query) => {
+    try {
+      const response = await fetch(`https://api.api-ninjas.com/v1/recipe?query=${encodeURIComponent(query)}`, {
+        headers: {
+          'X-Api-Key': 'yfwr5VqoyZmcOCJRNC0l3Q==BI5paE4i7T3Nload',
+        },
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Recipe API Error:', errorData);
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log('Recipe data:', data);
+      return data;
+    } catch (error) {
+      console.error('Error fetching recipes:', error);
+      throw error;
+    }
+  };
+
+  // Fetch images from Pexels API
+  const fetchImages = async (query) => {
+    try {
+      const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=15`, {
+        headers: {
+          'Authorization': 'FPuVufrCgR2u9v0vWKtIKH6hmsVgIyEKeDeaI3XnQ7vDSMnwxexIuww5', // Replace with your Pexels API key
+        },
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Pexels API Error:', errorData);
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log('Pexels data:', data);
+      return data.photos;
+    } catch (error) {
+      console.error('Error fetching images:', error);
+      return []; // Return empty array on error to prevent breaking the app
+    }
+  };
+
+  // Handle search submission
   const handleSearch = async (e) => {
     e.preventDefault();
+    
     if (!searchQuery.trim()) {
       alert('Please enter a search term.');
       return;
     }
+    
     try {
-      const response = await fetch(`https://api.api-ninjas.com/v1/recipe?query=${encodeURIComponent(searchQuery)}`, {
-        headers: {
-          'X-Api-Key': 'yfwr5VqoyZmcOCJRNC0l3Q==BI5paE4i7T3Nload', // Use your new API key here
-        },
+      // Fetch both recipes and images concurrently
+      const [recipesData, imagesData] = await Promise.all([
+        fetchRecipes(searchQuery),
+        fetchImages(searchQuery + ' food') // Adding 'food' to get more relevant food images
+      ]);
+      
+      // Combine recipe data with images
+      const recipesWithImages = recipesData.map((recipe, index) => {
+        // Get a corresponding image if available, cycling through available images
+        const image = imagesData.length > 0 ? imagesData[index % imagesData.length] : null;
+        
+        return {
+          ...recipe,
+          image: image ? image.src.medium : null,
+          photographer: image ? image.photographer : null,
+          photographerUrl: image ? image.photographer_url : null
+        };
       });
-      if (!response.ok) {
-        const errorData = await response.json(); // Parse error response
-        console.error('API Error:', errorData);
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log(data); // Log the fetched data
-      setRecipes(data); // Store the fetched recipes in state
+      
+      setRecipes(recipesWithImages);
     } catch (error) {
-      console.error('Error fetching recipes:', error);
-      alert(error.message); // Notify the user of the error
+      alert('Error fetching data: ' + error.message);
     }
   };
 
@@ -50,7 +107,7 @@ const App = () => {
                 handleSearch={handleSearch}
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
-                recipes={recipes} // Pass the recipes data to Home
+                recipes={recipes}
               />
             }
           />

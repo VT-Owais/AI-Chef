@@ -3,7 +3,8 @@
   border-radius: 8px;
   padding: 16px;
   margin: 16px;
-  width: 250px;
+  width: 100%; /* Make width flexible */
+  max-width: 300px; /* Set a maximum width for larger screens */
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -40,10 +41,12 @@
 .recipe-button:hover {
   background-color: #0056b3;
 }
+
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
   .recipe-card {
     width: 100%; 
     margin: 8px 0;
+    max-width: none; /* Remove max-width on smaller screens */
   }
 }

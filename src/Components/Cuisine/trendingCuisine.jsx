@@ -8,56 +8,91 @@ const TrendingCuisine = () => {
   const [trendingRecipes, setTrendingRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null); // Track selected recipe
   const containerRef = useRef(null);
+  const boxWidth = 320; // Width of each box including gap
 
-  // Use hardcoded recipes
+  // Fetch images from Pexels API
+  const fetchImages = async (query) => {
+    try {
+      const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=15`, {
+        headers: {
+          Authorization: 'FPuVufrCgR2u9v0vWKtIKH6hmsVgIyEKeDeaI3XnQ7vDSMnwxexIuww5', // Replace with your Pexels API key
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Pexels API Error:', errorData);
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Pexels data:', data);
+      return data.photos;
+    } catch (error) {
+      console.error('Error fetching images:', error);
+      return []; // Return empty array on error to prevent breaking the app
+    }
+  };
+
+  // Fetch trending recipes and images
   useEffect(() => {
-    const hardcodedRecipes = [
-      {
-        title: "Chris' Popular Chocolate Mousse",
-        ingredients: "350 mg Package Semi-Sweet Choco|Chips|1 pk Chocola…ream|1/4 c Margerine/butter|SpringForm Pan|Fridge",
-        servings: "1 Servings",
-        instructions: "THE CRUST Crush the wafers, preserving a few for g…ut 6 hours, though it might be ready before that.",
-        image: "https://via.placeholder.com/300x150",
-      },
-      {
-        title: "Pancakes",
-        ingredients: "flour, milk, eggs...",
-        instructions: "Mix ingredients and cook on a hot pan...",
-        image: "https://via.placeholder.com/300x150",
-      },
-      {
-        title: "Rock Cakes",
-        ingredients: "flour, sugar, butter...",
-        instructions: "Mix ingredients and bake...",
-        image: "https://via.placeholder.com/300x150",
-      },
-      {
-        title: "Spaghetti Carbonara",
-        ingredients: "spaghetti, eggs, bacon, cheese...",
-        instructions: "Cook spaghetti, mix with eggs and bacon...",
-        image: "https://via.placeholder.com/300x150",
-      },
-      {
-        title: "Chicken Curry",
-        ingredients: "chicken, curry powder, coconut milk...",
-        instructions: "Cook chicken with curry powder and coconut milk...",
-        image: "https://via.placeholder.com/300x150",
-      },
-      {
-        title: "Chocolate Cake",
-        ingredients: "flour, sugar, cocoa powder, eggs...",
-        instructions: "Mix ingredients and bake...",
-        image: "https://via.placeholder.com/300x150",
-      },
-      {
-        title: "Vegetable Stir Fry",
-        ingredients: "vegetables, soy sauce, garlic...",
-        instructions: "Stir fry vegetables with soy sauce and garlic...",
-        image: "https://via.placeholder.com/300x150",
-      },
-    ];
+    const fetchTrendingRecipesAndImages = async () => {
+      const hardcodedRecipes = [
+        {
+          title: "Chris' Popular Chocolate Mousse",
+          ingredients: "350 mg Package Semi-Sweet Choco|Chips|1 pk Chocola…ream|1/4 c Margerine/butter|SpringForm Pan|Fridge",
+          servings: "1 Servings",
+          instructions: "THE CRUST Crush the wafers, preserving a few for g…ut 6 hours, though it might be ready before that.",
+        },
+        {
+          title: "Pancakes",
+          ingredients: "flour, milk, eggs...",
+          instructions: "Mix ingredients and cook on a hot pan...",
+        },
+        {
+          title: "Rock Cakes",
+          ingredients: "flour, sugar, butter...",
+          instructions: "Mix ingredients and bake...",
+        },
+        {
+          title: "Spaghetti Carbonara",
+          ingredients: "spaghetti, eggs, bacon, cheese...",
+          instructions: "Cook spaghetti, mix with eggs and bacon...",
+        },
+        {
+          title: "Chicken Curry",
+          ingredients: "chicken, curry powder, coconut milk...",
+          instructions: "Cook chicken with curry powder and coconut milk...",
+        },
+        {
+          title: "Chocolate Cake",
+          ingredients: "flour, sugar, cocoa powder, eggs...",
+          instructions: "Mix ingredients and bake...",
+        },
+        {
+          title: "Vegetable Stir Fry",
+          ingredients: "vegetables, soy sauce, garlic...",
+          instructions: "Stir fry vegetables with soy sauce and garlic...",
+        },
+      ];
 
-    setTrendingRecipes(hardcodedRecipes); // Use hardcoded recipes
+      try {
+        // Fetch images for trending recipes
+        const images = await fetchImages('trending food');
+
+        // Combine hardcoded recipes with images
+        const recipesWithImages = hardcodedRecipes.map((recipe, index) => ({
+          ...recipe,
+          image: images[index % images.length]?.src.medium || 'https://via.placeholder.com/300x150', // Use a placeholder if no image is available
+        }));
+
+        setTrendingRecipes(recipesWithImages.slice(0, 7)); // Limit to 7 recipes
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchTrendingRecipesAndImages();
   }, []);
 
   // Auto-scroll every 4 seconds
@@ -70,10 +105,10 @@ const TrendingCuisine = () => {
         if (scrollPosition >= maxScroll) {
           setScrollPosition(0);
         } else {
-          setScrollPosition(scrollPosition + 320);
+          setScrollPosition(scrollPosition + boxWidth);
         }
       }
-    }, 3000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [scrollPosition]);
@@ -89,7 +124,7 @@ const TrendingCuisine = () => {
 
   const scrollLeft = () => {
     if (scrollPosition > 0) {
-      setScrollPosition(scrollPosition - 320);
+      setScrollPosition(scrollPosition - boxWidth);
     }
   };
 
@@ -99,7 +134,7 @@ const TrendingCuisine = () => {
       const maxScroll = container.scrollWidth - container.clientWidth;
 
       if (scrollPosition < maxScroll) {
-        setScrollPosition(scrollPosition + 320);
+        setScrollPosition(scrollPosition + boxWidth);
       }
     }
   };

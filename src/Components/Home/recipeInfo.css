@@ -40,20 +40,21 @@
 .recipe-info-left {
   flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start; /* Align image to the left */
+  align-items: flex-start; /* Add space at the top */
+  padding-top: 20px; /* Add space at the top */
 }
 
 .recipe-info-right {
-  flex: 1;
+  flex: 2; /* Give more space to the right content */
 }
 
 .recipe-title {
   font-size: 2.5rem;
   margin-bottom: 20px;
   color: #333;
-  font-family: 'Georgia', serif; /* Use a nice font */
-  font-weight: bold; /* Make it bold */
+  font-family: 'Georgia', serif;
+  font-weight: bold;
 }
 
 .green-heading {
@@ -64,7 +65,7 @@
 }
 
 .ingredients-list {
-  list-style-type: decimal; /* Numbered list */
+  list-style-type: decimal;
   padding-left: 20px;
   margin-bottom: 20px;
 }
@@ -91,7 +92,7 @@
 
 .instruction-paragraph span {
   display: block;
-  margin-left: 20px; /* Indent bullet points */
+  margin-left: 20px;
 }
 
 .recipe-image {
@@ -108,6 +109,8 @@
 
   .recipe-info-left {
     order: -1; /* Move image to the top on small screens */
+    justify-content: center; /* Center image on small screens */
+    padding-top: 0; /* Remove extra padding on small screens */
   }
 
   .recipe-info-modal {
@@ -116,7 +119,7 @@
   }
 
   .recipe-title {
-    font-size: 2rem; /* Adjust font size for smaller screens */
+    font-size: 2rem;
   }
 
   .green-heading {
@@ -126,5 +129,25 @@
   .ingredients-list li,
   .instruction-paragraph p {
     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipe-info-modal {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .recipe-title {
+    font-size: 1.8rem;
+  }
+
+  .green-heading {
+    font-size: 1.1rem;
+  }
+
+  .ingredients-list li,
+  .instruction-paragraph p {
+    font-size: 0.85rem;
   }
 }
