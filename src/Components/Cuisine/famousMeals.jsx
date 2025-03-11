@@ -65,7 +65,7 @@ const FamousMeals = () => {
         // Combine recipes with images
         const recipesWithImages = recipes.slice(0, 5).map((recipe, index) => ({
           ...recipe,
-          image: images[index % images.length]?.src.medium || 'https://via.placeholder.com/300x150', // Use a placeholder if no image is available
+          image: images[index % images.length]?.src.medium || 'https://via.placeholder.com/300x150', 
         }));
 
         setFamousRecipes(recipesWithImages);
