@@ -40,13 +40,13 @@
 .recipe-info-left {
   flex: 1;
   display: flex;
-  justify-content: flex-start; /* Align image to the left */
-  align-items: flex-start; /* Add space at the top */
-  padding-top: 20px; /* Add space at the top */
+  justify-content: flex-start;
+  align-items: flex-start; 
+  padding-top: 20px; 
 }
 
 .recipe-info-right {
-  flex: 2; /* Give more space to the right content */
+  flex: 2; 
 }
 
 .recipe-title {
@@ -108,9 +108,9 @@
   }
 
   .recipe-info-left {
-    order: -1; /* Move image to the top on small screens */
-    justify-content: center; /* Center image on small screens */
-    padding-top: 0; /* Remove extra padding on small screens */
+    order: -1; 
+    justify-content: center; 
+    padding-top: 0; 
   }
 
   .recipe-info-modal {

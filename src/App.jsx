@@ -10,7 +10,7 @@ import Login from './components/Login/Login';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [recipes, setRecipes] = useState([]); // State to store fetched recipes with images
+  const [recipes, setRecipes] = useState([]); 
 
   // Fetch recipes from API Ninjas
   const fetchRecipes = async (query) => {
@@ -41,7 +41,7 @@ const App = () => {
     try {
       const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=15`, {
         headers: {
-          'Authorization': 'FPuVufrCgR2u9v0vWKtIKH6hmsVgIyEKeDeaI3XnQ7vDSMnwxexIuww5', // Replace with your Pexels API key
+          'Authorization': 'FPuVufrCgR2u9v0vWKtIKH6hmsVgIyEKeDeaI3XnQ7vDSMnwxexIuww5', 
         },
       });
       
@@ -56,11 +56,10 @@ const App = () => {
       return data.photos;
     } catch (error) {
       console.error('Error fetching images:', error);
-      return []; // Return empty array on error to prevent breaking the app
+      return []; 
     }
   };
 
-  // Handle search submission
   const handleSearch = async (e) => {
     e.preventDefault();
     
@@ -70,15 +69,12 @@ const App = () => {
     }
     
     try {
-      // Fetch both recipes and images concurrently
       const [recipesData, imagesData] = await Promise.all([
         fetchRecipes(searchQuery),
-        fetchImages(searchQuery + ' food') // Adding 'food' to get more relevant food images
+        fetchImages(searchQuery + ' food')
       ]);
       
-      // Combine recipe data with images
       const recipesWithImages = recipesData.map((recipe, index) => {
-        // Get a corresponding image if available, cycling through available images
         const image = imagesData.length > 0 ? imagesData[index % imagesData.length] : null;
         
         return {

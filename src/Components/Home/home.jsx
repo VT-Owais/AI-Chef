@@ -8,8 +8,7 @@ const Home = ({ handleSearch, searchQuery, setSearchQuery, recipes }) => {
   const heroRef = useRef(null);
   const whatIsRef = useRef(null);
   const howItWorksRef = useRef(null);
-  const [selectedRecipe, setSelectedRecipe] = useState(null); // Track selected recipe
-
+  const [selectedRecipe, setSelectedRecipe] = useState(null); 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -35,13 +34,11 @@ const Home = ({ handleSearch, searchQuery, setSearchQuery, recipes }) => {
     };
   }, []);
 
-  // Handle "View Recipe" button click
   const handleViewRecipe = (recipe) => {
-    console.log('View Recipe Clicked:', recipe); // Log the clicked recipe
+    console.log('View Recipe Clicked:', recipe);
     setSelectedRecipe(recipe);
   };
 
-  // Close the RecipeInfo modal
   const handleCloseRecipeInfo = () => {
     setSelectedRecipe(null);
   };
@@ -70,7 +67,7 @@ const Home = ({ handleSearch, searchQuery, setSearchQuery, recipes }) => {
             <RecipeCard
               key={index}
               recipe={recipe}
-              onViewRecipe={() => handleViewRecipe(recipe)} // Pass onViewRecipe prop
+              onViewRecipe={() => handleViewRecipe(recipe)} 
             />
           ))}
         </div>

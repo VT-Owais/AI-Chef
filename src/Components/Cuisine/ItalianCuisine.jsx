@@ -1,20 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './cuisine.css';
-import RecipeInfo from '../Home/recipeInfo'; // Import the RecipeInfo component
+import RecipeInfo from '../Home/recipeInfo'; 
 
 const ItalianCuisine = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const containerRef = useRef(null);
-  const boxWidth = 370; // Width of each box including gap
+  const boxWidth = 370; 
 
   // Fetch images from Pexels API
   const fetchImages = async (query) => {
     try {
       const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=15`, {
         headers: {
-          Authorization: 'FPuVufrCgR2u9v0vWKtIKH6hmsVgIyEKeDeaI3XnQ7vDSMnwxexIuww5', // Replace with your Pexels API key
+          Authorization: 'FPuVufrCgR2u9v0vWKtIKH6hmsVgIyEKeDeaI3XnQ7vDSMnwxexIuww5', //Pexels API key
         },
       });
 
@@ -29,11 +29,10 @@ const ItalianCuisine = () => {
       return data.photos;
     } catch (error) {
       console.error('Error fetching images:', error);
-      return []; // Return empty array on error to prevent breaking the app
+      return []; 
     }
   };
 
-  // Fetch Italian cuisine data and images
   useEffect(() => {
     const fetchItalianRecipesAndImages = async () => {
       try {
@@ -56,7 +55,7 @@ const ItalianCuisine = () => {
         // Combine recipes with images
         const recipesWithImages = recipesData.map((recipe, index) => ({
           ...recipe,
-          image: images[index % images.length]?.src.medium || 'https://via.placeholder.com/300x150', // Use a placeholder if no image is available
+          image: images[index % images.length]?.src.medium || 'https://via.placeholder.com/300x150', 
         }));
 
         setRecipes(recipesWithImages);
@@ -103,7 +102,6 @@ const ItalianCuisine = () => {
         <button className="carousel-arrow right recipe-button" onClick={scrollRight}>&gt;</button>
       </div>
 
-      {/* Render the RecipeInfo component if a recipe is selected */}
       {selectedRecipe && (
         <RecipeInfo recipe={selectedRecipe} onClose={handleCloseRecipeInfo} />
       )}

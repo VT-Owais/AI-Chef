@@ -4,7 +4,6 @@ import './RecipeInfo.css';
 const RecipeInfo = ({ recipe, onClose }) => {
   if (!recipe) return null;
 
-  // Split instructions into paragraphs
   const instructionParagraphs = recipe.instructions.split('\n').filter((para) => para.trim());
 
   return (

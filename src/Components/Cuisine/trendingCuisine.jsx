@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './cuisine.css';
-import RecipeCard from '../Home/RecipeCard'; // Correct import path
-import RecipeInfo from '../Home/RecipeInfo'; // Correct import path
+import RecipeCard from '../Home/RecipeCard';
+import RecipeInfo from '../Home/RecipeInfo'; 
 
 const TrendingCuisine = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [trendingRecipes, setTrendingRecipes] = useState([]);
-  const [selectedRecipe, setSelectedRecipe] = useState(null); // Track selected recipe
+  const [selectedRecipe, setSelectedRecipe] = useState(null); 
   const containerRef = useRef(null);
-  const boxWidth = 320; // Width of each box including gap
+  const boxWidth = 320; 
 
   // Fetch images from Pexels API
   const fetchImages = async (query) => {
     try {
       const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=15`, {
         headers: {
-          Authorization: 'FPuVufrCgR2u9v0vWKtIKH6hmsVgIyEKeDeaI3XnQ7vDSMnwxexIuww5', // Replace with your Pexels API key
+          Authorization: 'FPuVufrCgR2u9v0vWKtIKH6hmsVgIyEKeDeaI3XnQ7vDSMnwxexIuww5', // Pexels API key
         },
       });
 
@@ -30,7 +30,7 @@ const TrendingCuisine = () => {
       return data.photos;
     } catch (error) {
       console.error('Error fetching images:', error);
-      return []; // Return empty array on error to prevent breaking the app
+      return []; 
     }
   };
 
@@ -80,13 +80,12 @@ const TrendingCuisine = () => {
         // Fetch images for trending recipes
         const images = await fetchImages('trending food');
 
-        // Combine hardcoded recipes with images
         const recipesWithImages = hardcodedRecipes.map((recipe, index) => ({
           ...recipe,
-          image: images[index % images.length]?.src.medium || 'https://via.placeholder.com/300x150', // Use a placeholder if no image is available
+          image: images[index % images.length]?.src.medium || 'https://via.placeholder.com/300x150',
         }));
 
-        setTrendingRecipes(recipesWithImages.slice(0, 7)); // Limit to 7 recipes
+        setTrendingRecipes(recipesWithImages.slice(0, 7));
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -95,7 +94,6 @@ const TrendingCuisine = () => {
     fetchTrendingRecipesAndImages();
   }, []);
 
-  // Auto-scroll every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       if (containerRef.current) {
@@ -139,9 +137,8 @@ const TrendingCuisine = () => {
     }
   };
 
-  // Handle "View Recipe" button click
   const handleViewRecipe = (recipe) => {
-    console.log('View Recipe Clicked:', recipe); // Log the clicked recipe
+    console.log('View Recipe Clicked:', recipe);
     setSelectedRecipe(recipe);
   };
 
@@ -165,7 +162,7 @@ const TrendingCuisine = () => {
             <RecipeCard
               key={index}
               recipe={recipe}
-              onViewRecipe={() => handleViewRecipe(recipe)} // Pass onViewRecipe prop
+              onViewRecipe={() => handleViewRecipe(recipe)} 
             />
           ))}
         </div>
@@ -173,7 +170,6 @@ const TrendingCuisine = () => {
         <button className="nav-arrow nav-arrow-right" onClick={scrollRight}>&#10095;</button>
       </div>
 
-      {/* Render RecipeInfo modal if a recipe is selected */}
       {selectedRecipe && (
         <RecipeInfo recipe={selectedRecipe} onClose={handleCloseRecipeInfo} />
       )}

@@ -16,10 +16,10 @@ const Cuisine = () => {
         const maxScroll = container.scrollWidth - container.clientWidth;
 
         if (scrollPosition >= maxScroll) {
-          // Reset to beginning when reaching the end
+         
           setScrollPosition(0);
         } else {
-          // Scroll by the width of one card + gap
+
           setScrollPosition(scrollPosition + 320);
         }
       }
