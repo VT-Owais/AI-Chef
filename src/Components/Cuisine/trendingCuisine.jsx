@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './cuisine.css';
-import RecipeCard from '../Home/RecipeCard';
+import RecipeCard from '../Home/RecipeCard'; // Import the RecipeCard component
 import RecipeInfo from '../Home/RecipeInfo'; 
 
 const TrendingCuisine = () => {
@@ -34,57 +34,51 @@ const TrendingCuisine = () => {
     }
   };
 
+  // Fetch recipes from API Ninjas
+  const fetchRecipes = async (query) => {
+    try {
+      const response = await fetch(`https://api.api-ninjas.com/v1/recipe?query=${encodeURIComponent(query)}`, {
+        headers: {
+          'X-Api-Key': 'yfwr5VqoyZmcOCJRNC0l3Q==BI5paE4i7T3Nload', // API Ninjas key
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(`Error fetching recipes for ${query}:`, error);
+      return [];
+    }
+  };
+
   // Fetch trending recipes and images
   useEffect(() => {
     const fetchTrendingRecipesAndImages = async () => {
-      const hardcodedRecipes = [
-        {
-          title: "Chris' Popular Chocolate Mousse",
-          ingredients: "350 mg Package Semi-Sweet Choco|Chips|1 pk Chocola…ream|1/4 c Margerine/butter|SpringForm Pan|Fridge",
-          servings: "1 Servings",
-          instructions: "THE CRUST Crush the wafers, preserving a few for g…ut 6 hours, though it might be ready before that.",
-        },
-        {
-          title: "Pancakes",
-          ingredients: "flour, milk, eggs...",
-          instructions: "Mix ingredients and cook on a hot pan...",
-        },
-        {
-          title: "Rock Cakes",
-          ingredients: "flour, sugar, butter...",
-          instructions: "Mix ingredients and bake...",
-        },
-        {
-          title: "Spaghetti Carbonara",
-          ingredients: "spaghetti, eggs, bacon, cheese...",
-          instructions: "Cook spaghetti, mix with eggs and bacon...",
-        },
-        {
-          title: "Chicken Curry",
-          ingredients: "chicken, curry powder, coconut milk...",
-          instructions: "Cook chicken with curry powder and coconut milk...",
-        },
-        {
-          title: "Chocolate Cake",
-          ingredients: "flour, sugar, cocoa powder, eggs...",
-          instructions: "Mix ingredients and bake...",
-        },
-        {
-          title: "Vegetable Stir Fry",
-          ingredients: "vegetables, soy sauce, garlic...",
-          instructions: "Stir fry vegetables with soy sauce and garlic...",
-        },
-      ];
-
       try {
-        // Fetch images for trending recipes
-        const images = await fetchImages('trending food');
+        // Define the keywords for recipes you want to fetch
+        const keywords = ['Shawarma', 'Lebanese', 'Indian', 'Cheese', 'Curry'];
 
-        const recipesWithImages = hardcodedRecipes.map((recipe, index) => ({
+        // Fetch recipes for each keyword
+        const recipesPromises = keywords.map((keyword) => fetchRecipes(keyword));
+        const recipesResults = await Promise.all(recipesPromises);
+
+        // Combine all recipes into a single array
+        const allRecipes = recipesResults.flat();
+
+        // Fetch images for the recipes 
+        const images = await fetchImages('Shawarma Lebanese Indian Cheese Curry');
+
+        // Combine recipes with images
+        const recipesWithImages = allRecipes.map((recipe, index) => ({
           ...recipe,
           image: images[index % images.length]?.src.medium || 'https://via.placeholder.com/300x150',
         }));
 
+        // Limit to 7 recipes for the carousel
         setTrendingRecipes(recipesWithImages.slice(0, 7));
       } catch (error) {
         console.error('Error fetching data:', error);

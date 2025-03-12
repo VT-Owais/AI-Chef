@@ -2,7 +2,7 @@ import React from 'react';
 import './RecipeCard.css';
 
 const RecipeCard = ({ recipe, onViewRecipe }) => {
-  console.log('RecipeCard Props:', recipe, onViewRecipe); 
+  console.log('RecipeCard Props:', recipe, onViewRecipe);
   return (
     <div className="recipe-card">
       <img

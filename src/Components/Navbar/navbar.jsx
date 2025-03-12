@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { User } from 'lucide-react'; // Importing login icon from lucide-react
-import Login from '../Login/Login'; 
+import Login from '../Login/Login';
 import './navbar.css';
 
-const Navbar = ({ 
-  primaryColor = '#28a745', 
-  secondaryColor = '#00b74d', 
-  backgroundColor = 'rgba(240, 240, 240, 0.85)' 
+const Navbar = ({
+  primaryColor = '#28a745',
+  secondaryColor = '#00b74d',
+  backgroundColor = 'rgba(240, 240, 240, 0.85)'
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [newOpen, setNewOpen] = useState(false);
@@ -49,8 +49,8 @@ const Navbar = ({
 
   return (
     <>
-      <nav 
-        className={`navbar ${scrolled ? 'scrolled' : ''}`} 
+      <nav
+        className={`navbar ${scrolled ? 'scrolled' : ''}`}
         style={{
           '--primary-color': primaryColor,
           '--secondary-color': secondaryColor,

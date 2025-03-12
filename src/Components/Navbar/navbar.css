@@ -79,7 +79,7 @@
 
 /* Active State for Nav Links */
 .nav-link.active {
-  color: var(--secondary-color); /* Keep the same color as default */
+  color: var(--secondary-color);
 }
 
 .nav-link.active::after {
@@ -87,9 +87,9 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%; /* Full width of the link */
+  width: 100%;
   height: 2px;
-  background-color: var(--primary-color); /* Green underline */
+  background-color: var(--primary-color);
 }
 
 /* Scrolled State for Nav Links */
@@ -98,11 +98,11 @@
 }
 
 .navbar.scrolled .nav-link.active {
-  color: color-mix(in srgb, var(--secondary-color), black 10%); /* Keep the same color as scrolled state */
+  color: color-mix(in srgb, var(--secondary-color), black 10%);
 }
 
 .navbar.scrolled .nav-link.active::after {
-  background-color: var(--primary-color); /* Green underline */
+  background-color: var(--primary-color);
 }
 
 .mobile-menu-btn {
@@ -134,36 +134,58 @@
 }
 
 .login-link:hover {
-  color:  rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
 }
 
 @media screen and (max-width: 768px) {
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
   .nav-links {
     display: none;
     flex-direction: column;
     position: absolute;
     top: 60px;
+    left: 0;
     right: 0;
     background-color: var(--background-color);
     backdrop-filter: blur(8px);
     width: 100%;
     text-align: center;
+    padding: 1rem 0;
+    z-index: 100;
   }
 
   .nav-links.active {
     display: flex;
   }
 
+  .navbar-logo {
+    flex-grow: 1;
+    text-align: left;
+  }
+
   .mobile-menu-btn {
     display: flex;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  .login-icon {
+    position: static;
+    display: flex;
+    align-items: center;
   }
 
   .navbar {
     padding: 0.8rem 1rem;
   }
-
-  .login-icon {
-    position: static;
-    margin-left: auto;
+  
+  .right-container {
+    display: flex;
+    align-items: center;
   }
 }

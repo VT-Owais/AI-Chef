@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import './home.css';
 import RecipeCard from './RecipeCard';
-import RecipeInfo from './RecipeInfo'; 
+import RecipeInfo from './RecipeInfo';
 
 const Home = ({ handleSearch, searchQuery, setSearchQuery, recipes }) => {
   const heroRef = useRef(null);
   const whatIsRef = useRef(null);
   const howItWorksRef = useRef(null);
-  const [selectedRecipe, setSelectedRecipe] = useState(null); 
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -22,7 +22,7 @@ const Home = ({ handleSearch, searchQuery, setSearchQuery, recipes }) => {
     );
 
     const sections = [heroRef.current, whatIsRef.current, howItWorksRef.current];
-    
+
     sections.forEach(section => {
       if (section) observer.observe(section);
     });
@@ -67,7 +67,7 @@ const Home = ({ handleSearch, searchQuery, setSearchQuery, recipes }) => {
             <RecipeCard
               key={index}
               recipe={recipe}
-              onViewRecipe={() => handleViewRecipe(recipe)} 
+              onViewRecipe={() => handleViewRecipe(recipe)}
             />
           ))}
         </div>
