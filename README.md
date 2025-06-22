@@ -1,8 +1,54 @@
-# React + Vite
+# AI Chef  (Internship Project) 🍽️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**AI Chef**is a responsive food recipe search application built with **React.js**. Users can search for recipes, view ingredients, and see cooking instructions — all fetched from external APIs. The app features a clean UI and smooth user experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔧 Features
+
+- Search for any dish and get recipe details
+- Fetch recipe images and instructions using public APIs
+- Responsive design for all screen sizes
+- Trending and Italian cuisine sections
+- Built with React Hooks and component-based architecture
+
+---
+
+## 📁 Tech Stack
+
+- **React.js**
+- **HTML / CSS**
+- **JavaScript**
+- **External APIs** for recipe data and images
+
+---
+
+## 🚀 Getting Started
+
+Follow the steps below to **clone and run this project** on your local machine:
+
+```bash
+# Clone the repository
+git clone https://github.com/YourUsername/AI-Chef.git
+
+# Navigate into the project directory
+cd AI-Chef
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm start
+
+
+📚 Learnings
+
+During this project, I learned:
+
+Structuring folders and components in React
+
+API integration and state management
+
+Building dynamic and reusable components
+
+Enhancing UI responsiveness
